@@ -31,38 +31,33 @@ classifier=Sequential()
 #  input_shape = (64, 64, 3) first (64,64) is the the dim of the image and 3 is the number of channels
 # if you choosed 128*128 you will take much time cause you are working in the cpu
 classifier.add(Conv2D(32,(3,3), input_shape = (128,128,3),activation='relu'))
-classifier.add(Dropout(rate = 0.1))
                             # pooling step
 classifier.add(MaxPooling2D(pool_size=(2,2)))
 
 
                             # adding another layer and pooling it
 classifier.add(Conv2D(32,(3,3),activation='relu'))
-classifier.add(Dropout(rate = 0.1))
 classifier.add(MaxPooling2D(pool_size=(2,2)))
                           
                        # adding another layer and pooling it
 classifier.add(Conv2D(64,(3,3),activation='relu'))
-classifier.add(Dropout(rate = 0.1))
 classifier.add(MaxPooling2D(pool_size=(2,2)))
 
 
                            
-                            # flattening stpe
+                                                        # flattening stpe
 classifier.add(Flatten())
-                           # full connection (our Ann)
- # common to choose units a power of two                          
-                               # first full connection layer 
+
+                               # first full connection layer
 classifier.add(Dense(units=128,activation='relu'))
-classifier.add(Dropout(rate = 0.1))
+classifier.add(Dropout(0.5))                                
                                # second full connection layer 
-                               
 classifier.add(Dense(units=128,activation='relu'))
-classifier.add(Dropout(rate = 0.1))
+classifier.add(Dropout(0.5))
 
                            # output layer 
-
 classifier.add(Dense(units=1,activation='sigmoid'))
+
 
 # compiling 
 classifier.compile(optimizer='adam',loss='binary_crossentropy', metrics=['accuracy'])    
